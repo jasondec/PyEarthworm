@@ -80,7 +80,7 @@ setup(
     version='1.41',
     author='Francisco J Hernandez Ramirez',
     url='https://github.com/Boritech-Solutions/PyEarthworm',
-    ext_modules=cythonize(Extension('PyEW', ['src/PyEW.pyx'])),
+    ext_modules=cythonize(Extension('PyEW', ['src/PyEW.pyx'], extra_compile_args=["-g", "-O0"], extra_link_args=["-g"]), gdb_debug=True),
     description='A Python interface to the Earthworm Seismic Data System.',
     long_description=long_description,
     long_description_content_type="text/markdown",
