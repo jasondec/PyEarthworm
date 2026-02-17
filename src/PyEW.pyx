@@ -413,7 +413,7 @@ cdef class EWModule:
         'startt': mypkt.trh2.starttime,
         'endt': mypkt.trh2.endtime,
         'datatype': mypkt.trh2.datatype.decode('UTF-8'),
-#        'modid': msg[3].decode('UTF-8'),
+        'modid': msg[3].decode('UTF-8'),
         'data': myarr}
 
         if datatype == 's4':
@@ -427,7 +427,7 @@ cdef class EWModule:
           'startt': struct.unpack("<d", struct.pack(">d", mypkt.trh2.starttime))[0],
           'endt': struct.unpack("<d", struct.pack(">d", mypkt.trh2.endtime))[0],
           'datatype': mypkt.trh2.datatype.decode('UTF-8'),
-#          'modid': msg[3],
+          'modid': msg[3].decode('UTF-8'),
           'data': myarr}
 
         return data
