@@ -383,6 +383,7 @@ cdef class EWModule:
       if msg != (0,0):
         if self.debug:
           logger.info("Got wave from array")
+          logger.info("Using mod_id updated code")
         mymsg = msg[2]
         memcpy(&mypkt, mymsg, msg[1])
 
@@ -426,6 +427,7 @@ cdef class EWModule:
           'startt': struct.unpack("<d", struct.pack(">d", mypkt.trh2.starttime))[0],
           'endt': struct.unpack("<d", struct.pack(">d", mypkt.trh2.endtime))[0],
           'datatype': mypkt.trh2.datatype.decode('UTF-8'),
+          'modid': msg[3].decode('UTF-8'),
           'data': myarr}
 
         return data
