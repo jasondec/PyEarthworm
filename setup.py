@@ -81,7 +81,7 @@ with open("README.md", "r") as fh:
 
 setup(
     name='PyEarthworm',
-    version='1.41-mod',
+    version='1.42a',
     author='Francisco J Hernandez Ramirez',
     url='https://github.com/Boritech-Solutions/PyEarthworm',
     ext_modules=cythonize(Extension('PyEW', ['src/PyEW.pyx'], extra_compile_args=["-g", "-O0"], extra_link_args=["-g"]), gdb_debug=True),
