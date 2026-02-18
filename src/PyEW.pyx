@@ -432,7 +432,7 @@ cdef class EWModule:
           'endt': struct.unpack("<d", struct.pack(">d", mypkt.trh2.endtime))[0],
           'datatype': mypkt.trh2.datatype.decode('UTF-8'),
           'instid': msg[3]['instid'],
-          'module': msg[3]['mod'],
+          'modid': msg[3]['mod'],
           'data': myarr}
 
         return data
