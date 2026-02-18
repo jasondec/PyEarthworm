@@ -80,7 +80,7 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setup(
-    name='PyEarthworm-mod',
+    name='PyEarthworm',
     version='1.41-mod',
     author='Francisco J Hernandez Ramirez',
     url='https://github.com/Boritech-Solutions/PyEarthworm',
