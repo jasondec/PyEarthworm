@@ -1,0 +1,73 @@
+diff --git a/setup.py b/setup.py
+index 4660908..9378f61 100644
+--- a/setup.py
++++ b/setup.py
+@@ -14,6 +14,10 @@
+ #    You should have received a copy of the GNU Affero General Public License
+ #    along with this program.  If not, see <https://www.gnu.org/licenses/>
+ 
++#    This library was modified slightly in 2026 to report the EW Module ID in the get_wave() function
++#    Contact jdecristofaro@usgs.gov
++#    Version changed below from 1.41 to 1.41-mod
++
+ import os
+ import sys
+ 
+@@ -77,7 +81,7 @@ with open("README.md", "r") as fh:
+ 
+ setup(
+     name='PyEarthworm',
+-    version='1.41',
++    version='1.41-mod',
+     author='Francisco J Hernandez Ramirez',
+     url='https://github.com/Boritech-Solutions/PyEarthworm',
+     ext_modules=cythonize(Extension('PyEW', ['src/PyEW.pyx'], extra_compile_args=["-g", "-O0"], extra_link_args=["-g"]), gdb_debug=True),
+diff --git a/src/PyEW.pyx b/src/PyEW.pyx
+index 3be29ea..248cfdd 100644
+--- a/src/PyEW.pyx
++++ b/src/PyEW.pyx
+@@ -1,6 +1,7 @@
+ #    PyEW is a library that creates a python interface to the Earthworm Transport system
+ #    Copyright (C) 2018  Francisco J Hernandez Ramirez
+ #    You may contact me at FJHernandez89@gmail.com, FHernandez@boritechsolutions.com
++#   
+ #
+ #    This program is free software: you can redistribute it and/or modify
+ #    it under the terms of the GNU Affero General Public License as published by
+@@ -15,6 +16,9 @@
+ #    You should have received a copy of the GNU Affero General Public License
+ #    along with this program.  If not, see <https://www.gnu.org/licenses/>
+ 
++#    This library was modified slightly in 2026 to report EW Module ID alongside get_wave
++#    Contact jdecristofaro@usgs.gov
++
+ # distutils: sources = src/src/transport.c src/src/sleep_ew.c src/src/getutil.c src/src/kom.c src/src/logit.c src/src/time_ew.c
+ # distutils: include_dirs = src/inc/
+ 
+@@ -168,7 +172,7 @@ cdef class transport:
+       if status == ctransport.GET_TOOBIG:
+         logger.error('Message too big for buffer')
+         return(0,0)
+-      return (status, rlen, realmsg)
++      return (status, rlen, realmsg, resp)
+     else:
+       return (0,0)
+ 
+@@ -412,6 +416,8 @@ cdef class EWModule:
+         'startt': mypkt.trh2.starttime,
+         'endt': mypkt.trh2.endtime,
+         'datatype': mypkt.trh2.datatype.decode('UTF-8'),
++        'instid': msg[3]['instid'],
++        'module': msg[3]['mod'],
+         'data': myarr}
+ 
+         if datatype == 's4':
+@@ -425,6 +431,8 @@ cdef class EWModule:
+           'startt': struct.unpack("<d", struct.pack(">d", mypkt.trh2.starttime))[0],
+           'endt': struct.unpack("<d", struct.pack(">d", mypkt.trh2.endtime))[0],
+           'datatype': mypkt.trh2.datatype.decode('UTF-8'),
++          'instid': msg[3]['instid'],
++          'module': msg[3]['mod'],
+           'data': myarr}
+ 
+         return data
