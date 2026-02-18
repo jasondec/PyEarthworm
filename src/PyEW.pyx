@@ -1,6 +1,7 @@
 #    PyEW is a library that creates a python interface to the Earthworm Transport system
 #    Copyright (C) 2018  Francisco J Hernandez Ramirez
 #    You may contact me at FJHernandez89@gmail.com, FHernandez@boritechsolutions.com
+#   
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as published by
@@ -14,6 +15,9 @@
 #
 #    You should have received a copy of the GNU Affero General Public License
 #    along with this program.  If not, see <https://www.gnu.org/licenses/>
+
+#    This library was modified slightly in 2026 to report EW Module ID alongside get_wave
+#    Contact jdecristofaro@usgs.gov
 
 # distutils: sources = src/src/transport.c src/src/sleep_ew.c src/src/getutil.c src/src/kom.c src/src/logit.c src/src/time_ew.c
 # distutils: include_dirs = src/inc/
@@ -168,7 +172,7 @@ cdef class transport:
       if status == ctransport.GET_TOOBIG:
         logger.error('Message too big for buffer')
         return(0,0)
-      return (status, rlen, realmsg)
+      return (status, rlen, realmsg, resp)
     else:
       return (0,0)
 
@@ -383,6 +387,7 @@ cdef class EWModule:
       if msg != (0,0):
         if self.debug:
           logger.info("Got wave from array")
+          logger.info("Using mod_id updated code")
         mymsg = msg[2]
         memcpy(&mypkt, mymsg, msg[1])
 
@@ -412,6 +417,8 @@ cdef class EWModule:
         'startt': mypkt.trh2.starttime,
         'endt': mypkt.trh2.endtime,
         'datatype': mypkt.trh2.datatype.decode('UTF-8'),
+        'instid': msg[3]['instid'],
+        'module': msg[3]['mod'],
         'data': myarr}
 
         if datatype == 's4':
@@ -425,6 +432,7 @@ cdef class EWModule:
           'startt': struct.unpack("<d", struct.pack(">d", mypkt.trh2.starttime))[0],
           'endt': struct.unpack("<d", struct.pack(">d", mypkt.trh2.endtime))[0],
           'datatype': mypkt.trh2.datatype.decode('UTF-8'),
+          'modid': msg[3],
           'data': myarr}
 
         return data

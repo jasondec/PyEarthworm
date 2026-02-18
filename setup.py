@@ -14,6 +14,10 @@
 #    You should have received a copy of the GNU Affero General Public License
 #    along with this program.  If not, see <https://www.gnu.org/licenses/>
 
+#    This library was modified slightly in 2026 to report the EW Module ID in the get_wave() function
+#    Contact jdecristofaro@usgs.gov
+#    Version changed below from 1.41 to 1.41-mod
+
 import os
 import sys
 
@@ -77,7 +81,7 @@ with open("README.md", "r") as fh:
 
 setup(
     name='PyEarthworm',
-    version='1.41',
+    version='1.41-mod',
     author='Francisco J Hernandez Ramirez',
     url='https://github.com/Boritech-Solutions/PyEarthworm',
     ext_modules=cythonize(Extension('PyEW', ['src/PyEW.pyx'], extra_compile_args=["-g", "-O0"], extra_link_args=["-g"]), gdb_debug=True),
