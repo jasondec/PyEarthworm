@@ -417,7 +417,7 @@ cdef class EWModule:
         'endt': mypkt.trh2.endtime,
         'datatype': mypkt.trh2.datatype.decode('UTF-8'),
         'instid': msg[3]['instid'],
-        'module': msg[3]['mod'],
+        'modid': msg[3]['mod'],
         'data': myarr}
 
         if datatype == 's4':
