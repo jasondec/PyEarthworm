@@ -1,6 +1,7 @@
 #    PyEW is a library that creates a python interface to the Earthworm Transport system
 #    Copyright (C) 2018  Francisco J Hernandez Ramirez
 #    You may contact me at FJHernandez89@gmail.com, FHernandez@boritechsolutions.com
+#   
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as published by
@@ -14,6 +15,9 @@
 #
 #    You should have received a copy of the GNU Affero General Public License
 #    along with this program.  If not, see <https://www.gnu.org/licenses/>
+
+#    This library was modified slightly in 2026 to report EW Module ID alongside get_wave
+#    Contact jdecristofaro@usgs.gov
 
 # distutils: sources = src/src/transport.c src/src/sleep_ew.c src/src/getutil.c src/src/kom.c src/src/logit.c src/src/time_ew.c
 # distutils: include_dirs = src/inc/
