@@ -1,3 +1,10 @@
+test/earthworm/run/params/*.state
+test/earthworm/run/data/*
+test/earthworm/run/log/*
+!test/earthworm/bin/
+.*
+!.gitignore
+!.dockerignore
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

@@ -70,6 +70,17 @@ We can test this works by importing into python:
     $ python
     >>> import PyEW
 
+## Docker
+
+A Dockerfile and docker-compose.yaml are included for building and testing PyEarthworm without a local Earthworm installation. The container uses pre-compiled Earthworm v8.0b8 binaries on Rocky Linux 9.6, sets up shared memory rings via `startstop`, and includes a demo script.
+
+```
+docker compose build
+docker compose up
+```
+
+Test configuration files are in `test/earthworm/`. The container runs as `linux/amd64`.
+
 ## Usage:
 
 A Jupyter notebook workshop can be found [here](https://github.com/Fran89/PyEarthworm_Workshop).
