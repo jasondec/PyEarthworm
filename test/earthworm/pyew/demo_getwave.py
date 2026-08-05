@@ -55,16 +55,18 @@ class DemoRead:
             wave: dict with keys station, network, channel, location,
                   nsamp, samprate, startt, endt, datatype, data (numpy array)
         """
-        try:
-            log.info(f"{wave['network']}.{wave['station']}.{wave['channel']}.{wave['location']} "
-                 f"| samples={wave['nsamp']} rate={wave['samprate']} modid={wave['modid']} instid={wave['instid']} "
-                 f"start={wave['startt']:.3f}")
-        except KeyError:
+        log.debug(f"wave_dict: {wave}")
+        wave.pop('datatype')
+        wave.pop('data')
+        log.info(f'wave_dict: {wave}')
+        # log.info(f"{wave['network']}.{wave['station']}.{wave['channel']}.{wave['location']} "
+        #      f"| samples={wave['nsamp']} rate={wave['samprate']} modid={wave['modid']} instid={wave['instid']} "
+        #      f"start={wave['startt']:.3f}")
+        if not any(_id in wave for _id in ['modid', 'instid']):
             log.warning('Wave dict is missing instid or modid fields')
-            log.info(f"{wave['network']}.{wave['station']}.{wave['channel']}.{wave['location']} "
-                 f"| samples={wave['nsamp']} rate={wave['samprate']} "
-                 f"start={wave['startt']:.3f}")
-        log.info(f"wave_dict: {wave}")
+        # log.info(f"{wave['network']}.{wave['station']}.{wave['channel']}.{wave['location']} "
+        #      f"| samples={wave['nsamp']} rate={wave['samprate']} "
+        #      f"start={wave['startt']:.3f}")
 
     def do_loop(self, buf_ring=0):
         """
