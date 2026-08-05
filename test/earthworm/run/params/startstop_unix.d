@@ -72,5 +72,5 @@ Class/Priority    OTHER 0
 Process           "slink2ew slink2ew_IRIS2.d"
 Class/Priority    OTHER 0
 
-Process           "/opt/earthworm/venv/bin/python /opt/earthworm/pyew/demo_getwave.py"
-Class/Priority    OTHER 0
+#Process           "/opt/earthworm/venv/bin/python /opt/earthworm/pyew/demo_getwave.py"
+#Class/Priority    OTHER 0

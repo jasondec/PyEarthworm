@@ -96,7 +96,8 @@ instId INST_UW                # Override installation ID that is included
 
 
 Stream  UW_HOOD
-Stream. UW_LON
+Stream  UW_LON
+Stream  UW_SEA
 
 # Some SeedLink servers support extended selection capability and
 # allow wildcars (either '*' or '?') for both the network and station

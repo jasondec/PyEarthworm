@@ -3,6 +3,7 @@ test/earthworm/run/data/*
 test/earthworm/run/log/*
 !test/earthworm/bin/
 .*
+!.github
 !.gitignore
 !.dockerignore
 # Byte-compiled / optimized / DLL files
