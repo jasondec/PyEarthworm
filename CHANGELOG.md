@@ -2,6 +2,8 @@
 
 ## [Unreleased]
 
+### Fixed
+- PID comparison in `stopThread` and `restartThread` now strips null bytes and whitespace, extracts digits only via regex, and uses exact equality instead of substring matching. Prevents unintended PID matches (e.g., PID 12 matching inside "1234").
 ### Added
 - Dockerfile using pre-compiled Earthworm v8.0b8 binaries on Rocky Linux 9.6 (no source compilation required).
 - `docker-compose.yaml` for running the container with bind-mounted params and demo scripts.
