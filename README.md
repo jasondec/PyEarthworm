@@ -81,6 +81,17 @@ docker compose up
 
 Test configuration files are in `test/earthworm/`. The container runs as `linux/amd64`.
 
+## CI/CD
+
+A GitHub Actions workflow (`.github/workflows/test-pyew.yaml`) runs on push and PR to verify:
+
+1. The Docker container builds successfully
+2. Earthworm `startstop` creates shared memory rings
+3. `demo_getwave.py` receives waveform data from the ring within 30 seconds
+4. `import PyEW` succeeds
+
+Test results are published as a JUnit report in the GitHub checks UI, and logs are uploaded as artifacts.
+
 ## Usage:
 
 A Jupyter notebook workshop can be found [here](https://github.com/Fran89/PyEarthworm_Workshop).

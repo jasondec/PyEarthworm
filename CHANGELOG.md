@@ -8,6 +8,7 @@
 - `.dockerignore` to exclude build artifacts and state files from the build context.
 - `test/earthworm/` directory with Earthworm runtime configuration (params, bin scripts) for containerized testing.
 - `demo_getwave.py` example script showing continuous waveform reading with `EWModule.get_wave()`.
+- GitHub Actions CI pipeline (`.github/workflows/test-pyew.yaml`) that builds the container, starts Earthworm, and verifies PyEW can import, attach to rings, and receive waveform data.
 
 ### Changed
 - Updated `.gitignore` for test directory paths.
