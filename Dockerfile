@@ -1,3 +1,4 @@
+# syntax=docker/dockerfile:1.7
 # This container starts with Rocky9.6, installs Earthworm from the 
 #   pre-compiled binaries at earthwormcentral.com, installs Python in a VENV,
 #   and compiles PyEarthworm using the Earthworm ENV vars, CFLAGS, and includes.
