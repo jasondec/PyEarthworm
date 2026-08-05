@@ -22,6 +22,7 @@ import os, sys, time, threading, logging
 from libc.string cimport memcpy, memset, strncpy
 import numpy as np
 import struct
+import re
 
 cimport ctransport
 cimport ctracebuf
@@ -221,8 +222,9 @@ class stopThread(threading.Thread):
         self.temp.detach()
         self.funct()
       if inp != (0,0):
-        pid = inp[1][:inp[0]].decode('UTF-8')
-        if str(os.getpid()) in str(pid):
+        pid = inp[1][:inp[0]].decode('UTF-8').strip('\x00\n\r\t ')
+        pid_digits = re.sub(r'\D', '', pid)
+        if str(os.getpid()) == pid_digits:
           logger.info("Stop message for instance found.")
           self.temp.detach()
           self.funct()
@@ -250,8 +252,9 @@ class restartThread(threading.Thread):
       time.sleep(0.1)
       inp = self.temp.getmsg_type(107)
       if inp != (0,0):
-        pid = inp[1][:inp[0]].decode('UTF-8')
-        if str(os.getpid()) in str(pid):
+        pid = inp[1][:inp[0]].decode('UTF-8').strip('\x00\n\r\t ')
+        pid_digits = re.sub(r'\D', '', pid)
+        if str(os.getpid()) == pid_digits:
           logger.info("Restart message for instance found.")
           self.temp.detach()
           self.funct()
