@@ -125,3 +125,9 @@ run/media/*
 *.sw*
 *.bak
 tags
+
+# IDE
+.vscode/
+
+# Earthworm state files
+*.state

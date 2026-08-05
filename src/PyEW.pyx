@@ -169,7 +169,7 @@ cdef class transport:
       if status == ctransport.GET_TOOBIG:
         logger.error('Message too big for buffer')
         return(0,0)
-      return (status, rlen, realmsg)
+      return (status, rlen, realmsg, resp)
     else:
       return (0,0)
 
@@ -415,6 +415,8 @@ cdef class EWModule:
         'startt': mypkt.trh2.starttime,
         'endt': mypkt.trh2.endtime,
         'datatype': mypkt.trh2.datatype.decode('UTF-8'),
+        'instid': msg[3]['instid'],
+        'modid': msg[3]['mod'],
         'data': myarr}
 
         if datatype == 's4':
@@ -428,6 +430,8 @@ cdef class EWModule:
           'startt': struct.unpack("<d", struct.pack(">d", mypkt.trh2.starttime))[0],
           'endt': struct.unpack("<d", struct.pack(">d", mypkt.trh2.endtime))[0],
           'datatype': mypkt.trh2.datatype.decode('UTF-8'),
+          'instid': msg[3]['instid'],
+          'modid': msg[3]['mod'],
           'data': myarr}
 
         return data
