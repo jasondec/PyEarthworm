@@ -72,7 +72,7 @@ We can test this works by importing into python:
 
 ## Docker
 
-A Dockerfile and docker-compose.yaml are included for building and testing PyEarthworm without a local Earthworm installation. The container uses pre-compiled Earthworm v8.0b8 binaries on Rocky Linux 9.6, sets up shared memory rings via `startstop`, and includes a demo script.
+A Dockerfile and docker-compose.yaml are included for building and testing PyEarthworm without a local Earthworm installation. The container uses [pre-compiled Earthworm v8.0b8 binaries](http://earthwormcentral.org) on Rocky Linux 9.6 (amd64), sets up shared memory rings via `startstop`, and includes a demo script.
 
 ```
 docker compose build
