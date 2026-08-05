@@ -70,6 +70,28 @@ We can test this works by importing into python:
     $ python
     >>> import PyEW
 
+## Docker
+
+A Dockerfile and docker-compose.yaml are included for building and testing PyEarthworm without a local Earthworm installation. The container uses [pre-compiled Earthworm v8.0b8 binaries](http://earthwormcentral.org) on Rocky Linux 9.6 (amd64), sets up shared memory rings via `startstop`, and includes a demo script.
+
+```
+docker compose build
+docker compose up
+```
+
+Test configuration files are in `test/earthworm/`. The container runs as `linux/amd64`.
+
+## CI/CD
+
+A GitHub Actions workflow (`.github/workflows/test-pyew.yaml`) runs on push and PR to verify:
+
+1. The Docker container builds successfully
+2. Earthworm `startstop` creates shared memory rings
+3. `demo_getwave.py` receives waveform data from the ring within 30 seconds
+4. `import PyEW` succeeds
+
+Test results are published as a JUnit report in the GitHub checks UI, and logs are uploaded as artifacts.
+
 ## Usage:
 
 A Jupyter notebook workshop can be found [here](https://github.com/Fran89/PyEarthworm_Workshop).
