@@ -64,6 +64,7 @@ class DemoRead:
             log.info(f"{wave['network']}.{wave['station']}.{wave['channel']}.{wave['location']} "
                  f"| samples={wave['nsamp']} rate={wave['samprate']} "
                  f"start={wave['startt']:.3f}")
+        log.info(f"wave_dict: {wave}")
 
     def do_loop(self, buf_ring=0):
         """

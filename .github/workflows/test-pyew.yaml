@@ -46,20 +46,17 @@ jobs:
                 REPORT="$REPORT<testcase name=\"startstop creates rings\" classname=\"earthworm\"><failure message=\"startstop exited unexpectedly\"/></testcase>"
               fi
 
-              # Test 2: demo_getwave.py attaches to ring
-              timeout 10 python /opt/earthworm/pyew/demo_getwave.py > /results/demo_output.log 2>&1 &
-              DEMO_PID=$!
-              sleep 5
-              if kill -0 $DEMO_PID 2>/dev/null; then
-                echo "PASS: demo_getwave.py attached to ring"
+              # Test 2: demo_getwave.py receives waveform data
+              timeout 30 python /opt/earthworm/pyew/demo_getwave.py > /results/demo_output.log 2>&1 || true
+              if grep -q "samples=" /results/demo_output.log; then
+                echo "PASS: demo_getwave.py received waveform data"
                 PASS=$((PASS+1))
-                REPORT="$REPORT<testcase name=\"demo_getwave attaches to ring\" classname=\"pyew\"/>"
-                kill $DEMO_PID
+                REPORT="$REPORT<testcase name=\"demo_getwave receives waveforms\" classname=\"pyew\"/>"
               else
-                echo "FAIL: demo_getwave.py exited unexpectedly"
+                echo "FAIL: no waveform data received within 30 seconds"
                 FAIL=$((FAIL+1))
-                MSG=$(cat /results/demo_output.log | head -5 | tr "\"" "^")
-                REPORT="$REPORT<testcase name=\"demo_getwave attaches to ring\" classname=\"pyew\"><failure message=\"$MSG\"/></testcase>"
+                MSG=$(tail -5 /results/demo_output.log | tr "\"" "^")
+                REPORT="$REPORT<testcase name=\"demo_getwave receives waveforms\" classname=\"pyew\"><failure message=\"$MSG\"/></testcase>"
               fi
 
               # Test 3: PyEW imports successfully
