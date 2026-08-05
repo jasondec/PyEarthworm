@@ -1,4 +1,3 @@
-# syntax=docker/dockerfile:1.7
 # This container starts with Rocky9.6, installs Earthworm from the 
 #   pre-compiled binaries at earthwormcentral.com, installs Python in a VENV,
 #   and compiles PyEarthworm using the Earthworm ENV vars, CFLAGS, and includes.
@@ -82,7 +81,8 @@ ENV PATH="${VIRTUAL_ENV}/bin:${PATH}"
 
 # copy this repo and install pyew
 WORKDIR ${EW_HOME}/pyew
-COPY --exclude=test . .
+COPY . .
+RUN rm -rf test
 RUN /bin/bash -c "source ${EW_BIN}/ew_linux.bash \
     && pip install --upgrade pip setuptools wheel --timeout 120 --retries 5 \
     && pip install cython numpy --timeout 120 --retries 5 \
