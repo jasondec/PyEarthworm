@@ -96,6 +96,7 @@ instId INST_PRSN                # Override installation ID that is included
 
 #Stream  UW_HOOD
 Stream  PR_PRSN
+Stream. PR_ICMP
 
 # Some SeedLink servers support extended selection capability and
 # allow wildcars (either '*' or '?') for both the network and station
